@@ -96,6 +96,14 @@ def getzeros(num):
     return leadingzeros, otherdigits
 
 
+def islegal(num):
+    try:
+        temp = float(num)
+        return True
+    except ValueError:
+        return False
+
+
 def getsign(num):
     """input the raw num string, return a tuple (sign_num, num_abs).
     """
@@ -103,6 +111,8 @@ def getsign(num):
     if num.startswith('±'):
         sign_num = plus_minus
         num_abs = num.lstrip('±+-')
+        if not islegal(num_abs):
+            return sign_num, ''
     else:
         try:
             temp = float(num)
@@ -155,7 +165,7 @@ def num2zh(num, sep='', significant=False):
             else:
                 return sign_num + int2zh(num)
         else:
-            print('Thank you!')
+            print('Thank you! A decent number...')
 
 
 if __name__ == '__main__':
