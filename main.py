@@ -155,7 +155,7 @@ def num2zh(num, sep='', significant=False):
             else:
                 return sign_num + int2zh(num)
         else:
-            pass
+            print('Thank you!')
 
 
 if __name__ == '__main__':
