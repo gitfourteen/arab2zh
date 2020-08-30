@@ -98,7 +98,7 @@ def getzeros(num):
 
 def islegal(num):
     try:
-        temp = float(num)
+        float(num)
         return True
     except ValueError:
         return False
