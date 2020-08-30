@@ -32,6 +32,8 @@ def int2zh(num):
     either the integer part of a float or just an integer itself
     return the counterpart string of its Chinese version.
     """
+    if num == '':
+        return ''
     if float(num) == 0:
         return digit[0]
 
@@ -80,6 +82,20 @@ def int2zh(num):
     return re.sub("^一十", '十', s[::-1])
 
 
+def getzeros(num):
+    """get leading zeros for a number string `num`.
+    return a tuple `(leadingzeros, otherdigits)`
+    """
+    leadingzeros = ''
+    otherdigits = ''
+    for i in range(len(num)):
+        if num[i] != '0':
+            otherdigits = num[i:]
+            break
+        leadingzeros += num[i]
+    return leadingzeros, otherdigits
+
+
 def getsign(num):
     """input the raw num string, return a tuple (sign_num, num_abs).
     """
@@ -120,9 +136,11 @@ def num2zh(num, sep='', significant=False):
 
     if '.' in num:
         integers, remainders = num.split('.')
+        # ipdb.set_trace()
         if integers.isdigit():
-            if not significant and (int(integers) == 0):
-                str_int = ''.join([digit[0] for d in integers])
+            leadingzeros, otherdigits = getzeros(integers)
+            if insignificant:
+                str_int = len(leadingzeros)*digit[0] + int2zh(otherdigits)
             else:
                 str_int = int2zh(integers)
         else:
@@ -131,10 +149,13 @@ def num2zh(num, sep='', significant=False):
         str_remainder = ''.join([digit[int(x)] for x in remainders])
         return sign_num + str_int + decimal_dot + str_remainder
     else:
-        if not significant and (int(num) == 0):
-            return sign_num + ''.join([digit[0] for d in num])
-        else:
-            return sign_num + int2zh(num)
+        if num.isdigit():
+            leadingzeros, otherdigits = getzeros(num)
+            if insignificant:
+                return sign_num+ len(leadingzeros)*digit[0] + int2zh(otherdigits)
+            else:
+                return sign_num + int2zh(num)
+
 
 if __name__ == '__main__':
     for line in sys.stdin:
