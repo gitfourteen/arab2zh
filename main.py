@@ -86,7 +86,7 @@ def getsign(num):
     sign_num = ''
     if num.startswith('±'):
         sign_num = plus_minus
-        num = num.lstrip('±+-')
+        num_abs = num.lstrip('±+-')
     else:
         try:
             temp = float(num)
@@ -100,10 +100,10 @@ def getsign(num):
                     sign_num = sign_negative
                 if num.startswith('+'):
                     sign_num = sign_positive
-            num = num.lstrip('+-')
+            num_abs = num.lstrip('+-')
         except ValueError:
             raise
-    return sign_num, num
+    return sign_num, num_abs
 
 
 def num2zh(num, sep='', significant=False):
