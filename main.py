@@ -6,8 +6,8 @@
 2. not support scientific format, like 1.0e-1
 3. ON/OFF insignificant figures
 
-More exampls:
-' ± -000.000100'            >> 正负零点零零零一零零
+More exampls, if digit[0] is '零':
+' ± -000.000100'            >> 正负零零零点零零零一零零
 '10101010101'               >> 一百零一亿零一百零一万零一百零一
 '-10080038703101.0'         >> 负十兆零八百亿零三千八百七十万三千一百零一点零
 '-12970000000001001.1'      >> 负一万二千九百七十兆零一千零一点
@@ -88,23 +88,23 @@ def getsign(num):
     sign_num = ''
     if num.startswith('±'):
         sign_num = plus_minus
-        num = num.lstrip('±')
-
-    try:
-        temp = float(num)
-        if (temp < 0) and (sign_num == ''):
-            sign_num = sign_negative
-        elif (temp > 0) and (sign_num == ''):
-            if ('+' in num):
-                sign_num = sign_positive
-        else:
-            if num.startswith('-'):
+        num = num.lstrip('±+-')
+    else:
+        try:
+            temp = float(num)
+            if (temp < 0) and (sign_num == ''):
                 sign_num = sign_negative
-            if num.startswith('+'):
-                sign_num = sign_positive
-        num = num.lstrip('+-')
-    except ValueError:
-        raise
+            elif (temp > 0) and (sign_num == ''):
+                if ('+' in num):
+                    sign_num = sign_positive
+            else:
+                if num.startswith('-'):
+                    sign_num = sign_negative
+                if num.startswith('+'):
+                    sign_num = sign_positive
+            num = num.lstrip('+-')
+        except ValueError:
+            raise
     # print("sign_num, num: ", sign_num, num)
     return sign_num, num
 
