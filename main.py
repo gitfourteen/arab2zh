@@ -16,7 +16,6 @@ More exampls, if digit[0] is '零':
 
 import sys
 import re
-# import ipdb
 
 
 digit = ["〇", "一", "二", "三", "四", "五", "六", "七", "八", "九"]
@@ -64,7 +63,6 @@ def int2zh(num):
                 if re.search(unit[6], s) is None:
                     s += unit[6]
                 s += f"{unit_minor[digit_count - 13]}{digit[d % 10]}"
-
             else:
                 raise ValueError('Overflow!')
 
@@ -105,7 +103,6 @@ def getsign(num):
             num = num.lstrip('+-')
         except ValueError:
             raise
-    # print("sign_num, num: ", sign_num, num)
     return sign_num, num
 
 
@@ -123,9 +120,8 @@ def num2zh(num, sep='', significant=False):
 
     if '.' in num:
         integers, remainders = num.split('.')
-        # ipdb.set_trace()
         if integers.isdigit():
-            if not significant and int(integers) == 0:
+            if not significant and (int(integers) == 0):
                 str_int = ''.join([digit[0] for d in integers])
             else:
                 str_int = int2zh(integers)
@@ -135,7 +131,7 @@ def num2zh(num, sep='', significant=False):
         str_remainder = ''.join([digit[int(x)] for x in remainders])
         return sign_num + str_int + decimal_dot + str_remainder
     else:
-        if not significant and int(num) == 0:
+        if not significant and (int(num) == 0):
             return sign_num + ''.join([digit[0] for d in num])
         else:
             return sign_num + int2zh(num)
