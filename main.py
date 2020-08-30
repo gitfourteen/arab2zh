@@ -136,7 +136,6 @@ def num2zh(num, sep='', significant=False):
 
     if '.' in num:
         integers, remainders = num.split('.')
-        # ipdb.set_trace()
         if integers.isdigit():
             leadingzeros, otherdigits = getzeros(integers)
             if insignificant:
