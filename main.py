@@ -154,6 +154,8 @@ def num2zh(num, sep='', significant=False):
                 return sign_num+ len(leadingzeros)*digit[0] + int2zh(otherdigits)
             else:
                 return sign_num + int2zh(num)
+        else:
+            pass
 
 
 if __name__ == '__main__':
