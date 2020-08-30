@@ -105,7 +105,7 @@ def getsign(num):
         num = num.lstrip('+-')
     except ValueError:
         raise
-    print("sign_num, num: ", sign_num, num)
+    # print("sign_num, num: ", sign_num, num)
     return sign_num, num
 
 
