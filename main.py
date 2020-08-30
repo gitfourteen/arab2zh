@@ -81,7 +81,7 @@ def int2zh(num):
 
 
 def getsign(num):
-    """input the raw num string, return a tuple (sign_num, num).
+    """input the raw num string, return a tuple (sign_num, num_abs).
     """
     sign_num = ''
     if num.startswith('±'):
