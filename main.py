@@ -6,7 +6,7 @@
 2. not support scientific format, like 1.0e-1
 3. ON/OFF insignificant figures
 
-More exampls, if `digit[0]` is '零' `significant = False`:
+More exampls, if `digit[0]` is '零':
 ' ± -000.000100'            >> 正负零零零点零零零一零零
 '10101010101'               >> 一百零一亿零一百零一万零一百零一
 '-10080038703101.0'         >> 负十兆零八百亿零三千八百七十万三千一百零一点零
