@@ -132,7 +132,7 @@ def getsign(num):
     return sign_num, num_abs
 
 
-def num2zh(num, sep='', significant=False):
+def num2zh(num, sep='', insignificant=True):
     """main function. Default separators `sep` of digits is None.
     Set `significant` as True to exclude insignificant figures.
     """
